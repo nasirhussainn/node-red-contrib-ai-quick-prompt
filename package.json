@@ -12,5 +12,11 @@
   "dependencies": {
     "axios": "^1.7.9",
     "openai": "^4.77.0"
+  },
+  "node-red": {
+    "nodes": {
+      "ai-quick-prompt": "ai-quick-prompt.js"
+    }
   }
+
 }

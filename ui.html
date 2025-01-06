@@ -1,0 +1,83 @@
+<script type="text/javascript">
+    RED.nodes.registerType("ai-quick-prompt", {
+        category: "function",
+        color: "#a6bbcf",
+        defaults: {
+            name: { value: "" },
+            prompt: { value: "", required: true },
+            provider: { value: "openai", required: true },
+            apiKey: { value: "", required: true },
+            temperature: { value: 0.7 },
+            maxTokens: { value: 100 }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "function.png",
+        label: function () {
+            return this.name || "AI Quick Prompt";
+        },
+        oneditprepare: function () {
+            // Set initial values for fields
+            $("#node-input-name").val(this.name || "");
+            $("#node-input-prompt").val(this.prompt || "");
+            $("#node-input-provider").val(this.provider || "openai");
+            $("#node-input-apiKey").val(this.apiKey || "");
+            $("#node-input-temperature").val(this.temperature || 0.7);
+            $("#node-input-maxTokens").val(this.maxTokens || 100);
+        },
+        oneditsave: function () {
+            // Save field values
+            this.name = $("#node-input-name").val();
+            this.prompt = $("#node-input-prompt").val();
+            this.provider = $("#node-input-provider").val();
+            this.apiKey = $("#node-input-apiKey").val();
+            this.temperature = parseFloat($("#node-input-temperature").val());
+            this.maxTokens = parseInt($("#node-input-maxTokens").val(), 10);
+        }
+    });
+</script>
+
+<div class="form-row">
+    <label for="node-input-name">
+        <i class="fa fa-tag"></i> Name
+    </label>
+    <input type="text" id="node-input-name" placeholder="Name (optional)" />
+</div>
+
+<div class="form-row">
+    <label for="node-input-prompt">
+        <i class="fa fa-comment"></i> Prompt
+    </label>
+    <input type="text" id="node-input-prompt" placeholder="Enter your prompt here" required />
+</div>
+
+<div class="form-row">
+    <label for="node-input-provider">
+        <i class="fa fa-cogs"></i> Provider
+    </label>
+    <select id="node-input-provider" required>
+        <option value="openai">OpenAI</option>
+        <option value="huggingface">Hugging Face</option>
+    </select>
+</div>
+
+<div class="form-row">
+    <label for="node-input-apiKey">
+        <i class="fa fa-key"></i> API Key
+    </label>
+    <input type="text" id="node-input-apiKey" placeholder="Enter API Key" required />
+</div>
+
+<div class="form-row">
+    <label for="node-input-temperature">
+        <i class="fa fa-thermometer-half"></i> Temperature
+    </label>
+    <input type="number" id="node-input-temperature" placeholder="0.7" min="0" max="1" step="0.1" required />
+</div>
+
+<div class="form-row">
+    <label for="node-input-maxTokens">
+        <i class="fa fa-bars"></i> Max Tokens
+    </label>
+    <input type="number" id="node-input-maxTokens" placeholder="100" min="10" max="2048" required />
+</div>
